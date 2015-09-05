@@ -1,0 +1,53 @@
+.home{
+	overflow: auto;
+}
+
+.home
+.menuBuscador{
+	border: 2px solid;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+  	align-items: center;
+}
+
+.home
+.menuBuscador
+.menuBuscador-container
+.titulo{
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+.home
+.menuBuscador
+.menuBuscador-container
+.buscador{
+	width: 300px;
+}
+
+.home
+.articulos{
+	border-bottom: 2px solid;
+	border-left: 2px solid;
+	border-right: 2px solid;
+	/*padding: 0 20px;*/
+	display: flex;
+	justify-content:space-between;
+	text-align: center;
+}
+
+.home
+.articulos
+.articulo{	
+	border: 2px solid;
+	padding: 0 15px;
+	width: 30%;
+}
+
+.home
+.articulos
+.articulo
+.texto{
+	text-align: justify;
+}

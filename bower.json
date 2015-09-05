@@ -1,0 +1,20 @@
+{
+  "name": "TP-AirBnb",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jtonelli/TP-AirBnb",
+  "authors": [
+    "Juan Tonelli <j.tonelli90@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-ui-router": "~0.2.15"
+  }
+}

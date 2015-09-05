@@ -1,0 +1,36 @@
+        <section class="resultado">
+
+            <section class="filtros">
+                <div class="filtros-container">
+                    <nav class="menu">
+                        <ul class="menuList">
+                            <li class="menuItem">
+                                <a href="#" class="links">
+                                    Filtro 1
+                                </a>
+                            </li>
+                            <li class="menuItem">
+                                <a href="#" class="links">
+                                    Filtro 2
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="resultados">
+                <article class="articulo" ng-repeat="item in resultados">
+                    <img src="{{item.thumbnail}}" alt="foto" class="foto">
+                    <section class="articulo-header">    
+                        <h2 class="titulo">{{item.title}} --- $ {{item.price}}</h2>
+                        <p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto sunt blanditiis quos optio accusantium nostrum sequi sapiente, dicta animi illo, tempore, vitae sit consequuntur. Consectetur fuga obcaecati debitis, maxime ratione!<br>
+                        {{item.thumbnail}}
+                        </p>
+                    </section>
+                    <div class="btn-container">
+                        <button class="btn-detalle">Ver</button>
+                    </div>
+                </article>
+            </section>
+        </section>

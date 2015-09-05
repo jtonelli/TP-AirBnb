@@ -1,0 +1,80 @@
+.mainHeader{
+	height: 70px;
+	background-color: gray;
+	padding: 0 20px;
+
+}
+
+.mainHeader 
+.mainHeader-container{
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mainHeader
+.mainHeader-container 
+.logo{
+	/*LOGO*/
+}
+
+.mainHeader
+.mainHeader-container
+.menuBuscador-container{
+	margin: 0 15px;
+	flex-grow:1;
+}
+
+.mainHeader
+.mainHeader-container
+.menuBuscador-container
+.buscador{
+	width: 300px;
+}
+
+.mainHeader 
+.mainHeader-container 
+.menu{
+	/*MENU-NAV*/
+}
+
+.mainHeader 
+.mainHeader-container 
+.menu 
+.menuList {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mainHeader 
+.mainHeader-container 
+.menu 
+.menuList 
+.menuItem {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.mainHeader 
+.mainHeader-container 
+.menu 
+.menuList 
+.menuItem 
+.links {
+	text-decoration: none;
+	color: white;
+	text-transform: uppercase;
+	font-family:'Comic Sans MS', sans-serif;
+	font-size: 14px;
+}
+
+.mainHeader 
+.mainHeader-container 
+.menu 
+.menuList 
+.menuItem:last-child {
+	margin-right: 0;
+}
