@@ -15,4 +15,4 @@ angular.module('tpAirbnApp').config(function($stateProvider,$urlRouterProvider){
 	})
 
 	$urlRouterProvider.otherwise('/home');
-})
+});
