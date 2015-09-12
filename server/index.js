@@ -1,19 +1,23 @@
 var request = require('request');
 var https = require("https");
-var express = require('express');
+var express = require('express'),
+    cors = require('cors');
 
 var app = express();
 var appReq = express();
 
+appReq.use(cors());
+app.use(cors());
+
 appReq.get('/meliProxy', function (req, res) {
   // console.log(req.query.q)
-  var url = 'https://api.mercadolibre.com/sites/MLA/search?q=' + req.query.q + '&limit=1';
+  var url = 'https://api.mercadolibre.com/sites/MLA/search?q=' + req.query.q + '&limit=10';
 
   request.get(url, function (err, resMeli, body) {
       if (!err) {
-          // var resultsObj = JSON.parse(body);
+          var resultsObj = JSON.parse(body);
           //Just an example of how to access properties:
-          res.json(body);
+          res.json(resultsObj);
       }
   });
 });
