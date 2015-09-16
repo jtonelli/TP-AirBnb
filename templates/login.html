@@ -1,0 +1,20 @@
+<h2>Ingresar</h2>
+<div class="form-container">
+    <!-- novalidate -->
+    <form class="myform">
+        <fieldset class="myfield">
+            <label class="mylabel" for="email">Email</label>
+            <input class="myinput" type="email" name="email" id="email" placeholder="" ng-model="email" required>
+        </fieldset>
+        <fieldset class="myfield">
+            <label class="mylabel" for="password">Contraseña</label>
+            <input class="myinput" type="password" name="password" placeholder="" ng-model="pass">
+        </fieldset>
+        <fieldset class="myfield">
+            <a href="" ui-sref="recuperarPassword">Olvide mi contraseña</a>
+        </fieldset>
+        <fieldset class="myfield">
+            <button class="mybutton" ng-click="loginConValidacion()">Ingresar</button>
+        </fieldset>
+    </form>
+</div>

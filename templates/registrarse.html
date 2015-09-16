@@ -1,0 +1,21 @@
+<h2>Registro</h2>
+<!-- novalidate -->
+<div class="form-container">
+    <form class="myform">
+        <fieldset class="myfield">
+            <label class="mylabel" for="email">Email</label>
+            <input class="myinput" type="email" name="email" id="email" placeholder="" ng-model="email" required>
+        </fieldset>
+        <fieldset class="myfield">
+            <label class="mylabel" for="password">Contraseña</label>
+            <input class="myinput" type="password" name="password" ng-model="pass">
+        </fieldset>
+        <fieldset class="myfield">
+            <label class="mylabel" for="confirmpassword">Repetir Contraseña</label>
+            <input class="myinput" type="password" name="confirmpassword" ng-model="confirmpass">
+        </fieldset>
+        <fieldset class="myfield">
+            <button class="mybutton" ng-click="registroConValidacion()">Registrarme</button>
+        </fieldset>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+.form-container{
+	display: flex;
+	justify-content:space-between;
+}
+
+.myfield{
+	border: none;
+	margin: 0;
+	padding: 10px 0px;
+}
+
+.mylabel{
+	display: block;
+}
+
+.myinput{
+	display: block;
+}
+
+.mybutton{
+	width: 100%;
+}

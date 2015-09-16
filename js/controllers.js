@@ -16,6 +16,10 @@ mod.controller('MainCtrl',function($rootScope,$scope, $state){
 			});
 		}
 	}
+
+	$scope.mostrarSeccion = function(nombreSeccion){	
+		$state.go(nombreSeccion);
+	}
 });
 
 mod.controller('HomeCtrl',function($scope, $state){
@@ -41,4 +45,38 @@ mod.controller('ResultadoCtrl',function($scope,$stateParams,$http){
 			$scope.resultados = r.data.results;
 			$scope.cantResultados = r.data.paging.total;
 		});
+});
+
+mod.controller('LoginCtrl',function($scope,$http,$state){
+
+	$scope.loginConValidacion = function(){
+		var url = 'http://localhost:3000/auth/?email=' + $scope.email + '&password=' + $scope.pass;
+
+		$http.get(url).then(function(r){
+			console.log(r);
+			$scope.resultado = r;
+			$state.go('home');
+		});
+	}
+});
+
+mod.controller('RegistroCtrl',function($scope,$http,$state){
+
+	$scope.registroConValidacion = function(){
+		var url = 'http://localhost:3000/Users/';
+		var data = {
+			email: $scope.email,
+			password: $scope.pass,
+		}
+
+		$http.post(url, data).then(function(r){
+			console.log(r);
+			$scope.resultado = r;
+			$state.go('loing');
+		});
+	}
+});
+
+mod.controller('RecuperarPassCtrl',function($scope,$http,$state){
+
 });
