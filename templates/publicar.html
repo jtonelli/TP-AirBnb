@@ -1,0 +1,31 @@
+<h2>Publicar Depto</h2>
+<div class="form-container">
+    <!-- novalidate -->
+    <form class="myform">
+        <fieldset class="myfield">
+            <label class="mylabel" for="titulo">Titulo</label>
+            <input class="myinput" type="text" name="titulo" id="titulo" placeholder="" ng-model="titulo" required>
+        </fieldset>
+        <fieldset class="myfield">
+            <label class="mylabel" for="descripcion">Descripcion</label>
+            <textarea class="myarea" name="descripcion" id="descripcion" placeholder="" rows="5" ng-model="descripcion"></textarea>
+        </fieldset>
+        <fieldset class="myfield">
+            <label class="mylabel" for="direccion">Direccion</label>
+            <div class="mysearchfield-container">
+                <input class="myinput" type="text" name="direccion" placeholder="" ng-model="direccion">
+                <button class="mybutton">Buscar</button>
+            </div>
+        </fieldset>
+        <fieldset class="myfield">
+            <label class="mylabel">Imagenes</label>
+            <div class="mysearchfield-container">
+                <img src="" alt="foto" class="foto">
+                <button class="mybutton">Agregar</button>
+            </div>
+        </fieldset>
+        <fieldset class="myfield">
+            <button class="mybutton">Publicar</button>
+        </fieldset>
+    </form>
+</div>

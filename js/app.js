@@ -32,5 +32,23 @@ angular.module('tpAirbnApp').config(function($stateProvider,$urlRouterProvider){
 	  controller:'RecuperarPassCtrl'
 	})
 
+	$stateProvider.state('publicar', {
+	  url: "/publicar",
+	  templateUrl: "templates/publicar.html",
+	  controller:'PublicarCtrl'
+	})
+
+	$stateProvider.state('publicaciones', {
+	  url: "/publicaciones",
+	  templateUrl: "templates/publicaciones.html",
+	  controller:'PublicacionesCtrl'
+	})
+
+	$stateProvider.state('publicacionesDet', {
+	  url: "/publicacionesDet",
+	  templateUrl: "templates/publicacionesDet.html",
+	  controller:'PublicacionesDetCtrl'
+	})
+
 	$urlRouterProvider.otherwise('/home');
 });

@@ -1,0 +1,104 @@
+.pub-det
+.pub-datos {
+	overflow: auto;	
+}
+
+.pub-det
+.pub-datos 
+.articulo {
+	display: flex;
+	justify-content:space-between;
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.foto {	
+	border: 2px solid;
+	width: 60%;
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.arti-data {	
+	/*padding: 0 15% 0 15px;*/
+	width: 38%;
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.arti-data
+.fecha-container {
+
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.arti-data
+.fecha-container 
+.fecha {
+	display: inline-block;
+	width: 45%;
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.btn-container {	
+/*	padding: 15px;
+	width: 20%;*/
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.btn-container
+.btn-detalle {	
+	width: 100%;
+	height: 32px;
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.texto {	
+/*	padding: 15px;
+	width: 20%;*/
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.user-data-container {
+	display: flex;
+	/*justify-content: center;*/
+  	align-items: center;
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.user-data-container 
+.user-pic {
+	display: inline-block;
+	width: 40%
+}
+
+.pub-det
+.pub-datos 
+.articulo
+.user-data-container
+.titulo {
+	display: inline-block;
+}
+
+.pub-det
+.pub-map {
+	margin: 20px 0;
+	height: 350px;
+	width: 100%;
+	border: 2px solid;
+}

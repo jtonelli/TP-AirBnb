@@ -80,3 +80,15 @@ mod.controller('RegistroCtrl',function($scope,$http,$state){
 mod.controller('RecuperarPassCtrl',function($scope,$http,$state){
 
 });
+
+mod.controller('PublicacionesDetCtrl',function($scope,$http,$state){
+
+});
+
+mod.controller('PublicacionesCtrl',function($scope,$http,$state){
+
+});
+
+mod.controller('PublicarCtrl',function($scope,$http,$state){
+
+});

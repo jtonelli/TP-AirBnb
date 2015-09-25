@@ -9,14 +9,43 @@
 	padding: 10px 0px;
 }
 
+.myfield
 .mylabel{
 	display: block;
 }
 
+.myfield
 .myinput{
 	display: block;
 }
 
+.myfield
+.myarea{
+	display: block;
+}
+
+.myfield
 .mybutton{
 	width: 100%;
+}
+
+.mysearchfield-container{
+	border: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+  	align-items: center;
+}
+
+.mysearchfield-container
+.foto{
+	width: 48px;
+	height: 48px;
+}
+
+.mysearchfield-container
+.mybutton{
+	margin-left: 5px;
+	width: 60px;
+	height: 100%;
 }

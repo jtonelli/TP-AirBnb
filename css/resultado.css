@@ -78,9 +78,8 @@
 .resultado
 .resultados
 .articulo {
-	border-bottom: 2px solid;
-	border-left: 2px solid;
-	border-right: 2px solid;
+	border: 2px solid;
+	margin-bottom: 10px;
 	display: flex;
 	justify-content:space-between;
 }
@@ -91,6 +90,7 @@
 .foto {	
 	padding: 15px;
 	width: 20%;
+	border: 2px solid;
 }
 
 .resultado
@@ -135,4 +135,5 @@
 .btn-detalle {	
 	width: 100%;
 	height: 32px;
+	margin-bottom: 10px;
 }
