@@ -12,7 +12,8 @@ var schema = new m.Schema({
        }
 	}, 
 	pictures:[{ url:String }], 
-	reservations:[mongoose.Schema.Types.ObjectId]
+	reservations:[mongoose.Schema.Types.ObjectId],
+	active: Boolean
 });
 
 module.exports = m.model('Apartments', schema);
