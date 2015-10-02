@@ -1,6 +1,6 @@
-var mongoose = require('_db.js');
+var mongoose = require('./_db.js');
 
-var schema = new m.Schema({ 
+var schema = new mongoose.Schema({ 
 	userId:mongoose.Schema.Types.ObjectId, 
 	apartmentId:mongoose.Schema.Types.ObjectId,
 	startDate:Date, 
@@ -8,4 +8,4 @@ var schema = new m.Schema({
 	active:Boolean
 });
 
-module.exports = m.model('Reservations', schema);
+module.exports = mongoose.model('Reservations', schema);

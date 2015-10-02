@@ -31,7 +31,9 @@
 .articulo
 .arti-data
 .fecha-container {
-
+	display: flex;
+	justify-content:space-between;
+	margin: 0 15px 10px 15px;
 }
 
 .pub-det
@@ -40,16 +42,15 @@
 .arti-data
 .fecha-container 
 .fecha {
-	display: inline-block;
-	width: 45%;
+	/*display: inline-block;*/
+	/*width: 45%;*/
 }
 
 .pub-det
 .pub-datos 
 .articulo
 .btn-container {	
-/*	padding: 15px;
-	width: 20%;*/
+	margin: 0 15px;
 }
 
 .pub-det

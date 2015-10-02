@@ -1,6 +1,15 @@
-angular.module('tpAirbnApp',['ui.router'])
+angular.module('tpAirbnApp',['ui.router','ngStorage'])
 
-angular.module('tpAirbnApp').config(function($stateProvider,$urlRouterProvider){
+angular.module('tpAirbnApp').config(function($stateProvider,$urlRouterProvider,$httpProvider){
+
+	$httpProvider.interceptors.push(function($q,$localStorage) {
+        return {
+            request: function(config) {
+            	config.headers['Authorization'] = $localStorage.token;
+                return config;
+            }
+        };
+    });
 
 	$stateProvider.state('home', {
 	  url: "/home",
@@ -33,7 +42,7 @@ angular.module('tpAirbnApp').config(function($stateProvider,$urlRouterProvider){
 	})
 
 	$stateProvider.state('publicar', {
-	  url: "/publicar",
+	  url: "/publicar/?query",
 	  templateUrl: "templates/publicar.html",
 	  controller:'PublicarCtrl'
 	})
@@ -45,7 +54,7 @@ angular.module('tpAirbnApp').config(function($stateProvider,$urlRouterProvider){
 	})
 
 	$stateProvider.state('publicacionesDet', {
-	  url: "/publicacionesDet",
+	  url: "/publicacionesDet/?query",
 	  templateUrl: "templates/publicacionesDet.html",
 	  controller:'PublicacionesDetCtrl'
 	})
