@@ -83,29 +83,31 @@ mod.controller('RecuperarPassCtrl',function($scope,$http,$state){
 
 mod.controller('PublicacionesDetCtrl',function($scope,$http,$state,$stateParams){
 	
-	var url = 'http://localhost:3000/Apartments/' + $stateParams.query;
+	iniciarmapa();
 
-	$http.get(url).then(function(r){
-		console.log(r);
-		$scope.resultado = r.data;
-		console.log('================');
-		console.log(r.data.address.coor.coordinates);
-		iniciarmapa();
-	});
+	// var url = 'http://localhost:3000/Apartments/' + $stateParams.query;
 
-	$scope.reservarDepto = function(apartmentId){
-		var urlReserva = 'http://localhost:3000/Reservations/';
-		var data = {
-			startDate: $scope.fechaDesde,
-			endDate: $scope.fechaHasta,
-		}
+	// $http.get(url).then(function(r){
+	// 	console.log(r);
+	// 	$scope.resultado = r.data;
+	// 	console.log('================');
+	// 	console.log(r.data.address.coor.coordinates);
+	// 	iniciarmapa();
+	// });
 
-		$http.post(urlReserva, data).then(function(r){
-			console.log(r);
-			$scope.resultado = r;
-			alert('Reserva OK');
-		});
-	}
+	// $scope.reservarDepto = function(apartmentId){
+	// 	var urlReserva = 'http://localhost:3000/Reservations/';
+	// 	var data = {
+	// 		startDate: $scope.fechaDesde,
+	// 		endDate: $scope.fechaHasta,
+	// 	}
+
+	// 	$http.post(urlReserva, data).then(function(r){
+	// 		console.log(r);
+	// 		$scope.resultado = r;
+	// 		alert('Reserva OK');
+	// 	});
+	// }
 });
 
 mod.controller('PublicacionesCtrl',function($scope,$http,$state){
@@ -141,6 +143,10 @@ mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 
 mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams){
 
+	$scope.buscarDireccion = function(){
+
+	}
+	
 	$scope.publicarDepto = function(){
 		var url = 'http://localhost:3000/Apartments/';
 		var data = {
@@ -149,7 +155,7 @@ mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams){
 			address:{ 
 				fullAdress:String, 
 				coor:{
-           			type:{ "Point" },
+           			type:"Point",
            			coordinates:[-34.623876, -58.417677]
        			}
 			}

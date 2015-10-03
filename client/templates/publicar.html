@@ -14,7 +14,7 @@
             <label class="mylabel" for="direccion">Direccion</label>
             <div class="mysearchfield-container">
                 <input class="myinput" type="text" name="direccion" placeholder="" ng-model="direccion">
-                <button class="mybutton">Buscar</button>
+                <button class="mybutton" type="button" ng-click="buscarDireccion()">Buscar</button>
             </div>
         </fieldset>
         <fieldset class="myfield">
@@ -25,7 +25,7 @@
             </div>
         </fieldset>
         <fieldset class="myfield">
-            <button class="mybutton" ng-click="publicarDepto({{item._id}})">Publicar</button>
+            <button class="mybutton" ng-click="publicarDepto()">Publicar</button>
         </fieldset>
     </form>
 </div>
