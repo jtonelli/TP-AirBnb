@@ -13,19 +13,30 @@
         <fieldset class="myfield">
             <label class="mylabel" for="direccion">Direccion</label>
             <div class="mysearchfield-container">
-                <input class="myinput" type="text" name="direccion" placeholder="" ng-model="direccion">
+                <input class="myinput" type="text" name="direccion" placeholder="" ng-model="direccion.FullAdress">
                 <button class="mybutton" type="button" ng-click="buscarDireccion()">Buscar</button>
+                <div id="map_canvas" style="width: 500px; height: 500px; display:none"></div>
             </div>
         </fieldset>
         <fieldset class="myfield">
             <label class="mylabel">Imagenes</label>
-            <div class="mysearchfield-container">
-                <img src="" alt="foto" class="foto">
-                <button type="button" class="mybutton">Agregar</button>
+            <button type="button" ng-click="dropzoneReset()">Quitar Imagenes</button>
+            <div class="dropzone-container">
+                <!-- <div dropzone="" id="dropzone" class="dropzone dz-clickable">
+                    <div class="dz-default dz-message">
+                        <span>Drop files here to upload</span>
+                    </div>
+                </div> -->
+                <div class="dropzone" dropzone="" id="dropzone">
+                    <div class="dz-default dz-message">
+                        <span>Drop files here to upload</span>
+                    </div>
+                </div>
             </div>
         </fieldset>
         <fieldset class="myfield">
             <button class="mybutton" ng-click="publicarDepto()">Publicar</button>
+            <!-- <button class="btn btn-success" type="button" ng-click="uploadFile()">Upload File</button> -->
         </fieldset>
     </form>
 </div>

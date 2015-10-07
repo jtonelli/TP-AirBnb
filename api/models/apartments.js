@@ -11,7 +11,7 @@ var schema = new mongoose.Schema({
            coordinates:[Number]
        }
 	},
-	pictures:[{ url:String }], 
+	pictures:[{ public_Id:String }],
 	reservations:[mongoose.Schema.Types.ObjectId],
 	active: Boolean
 });

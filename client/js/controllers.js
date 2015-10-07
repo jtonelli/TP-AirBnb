@@ -83,7 +83,17 @@ mod.controller('RecuperarPassCtrl',function($scope,$http,$state){
 
 mod.controller('PublicacionesDetCtrl',function($scope,$http,$state,$stateParams){
 	
-	iniciarmapa();
+	// var coordenadas = {
+	// 	Lat: -34.6081947,
+	// 	Lng: -58.4796471
+	// };
+
+	var coordenadas = {
+    	Lat: -34.709616,
+    	Lng: -58.368989
+    };
+
+	MyGMaps_initMapa(coordenadas, 'Ayacucho 2500', 'La casa de Juan');
 
 	// var url = 'http://localhost:3000/Apartments/' + $stateParams.query;
 
@@ -143,29 +153,80 @@ mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 
 mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams){
 
+	$scope.direccion = {
+	  FullAdress: '',
+	  Lat: 0,
+	  Lng: 0
+	};
+
+	$scope.direccion.FullAdress = 'zepita 3251, capital federal';
+
+	MyGoogleMapsV2_initialize();
+
 	$scope.buscarDireccion = function(){
 
+		MyGoogleMapsV2_findLocation($scope.direccion.FullAdress, function (response) {
+
+		    map.clearOverlays();
+
+		    if (!response || response.Status.code != 200) {
+		        $scope.direccion = {
+		            FullAdress: '',
+		            Lat: 0,
+		            Lng: 0
+		        };
+		    } else {
+
+		        $scope.direccion = {
+		            FullAdress: response.Placemark[0].address,
+		            Lat: response.Placemark[0].Point.coordinates[1],
+		            Lng: response.Placemark[0].Point.coordinates[0]
+		        };
+
+		        $scope.adress = response.Placemark[0].address;
+		    }
+	    	//??????????????????????
+		    $scope.$apply();
+		});
 	}
 	
+	// $scope.filename = '';
+    $scope.senddataobj = false;
+
+    $scope.dropzoneReset = function() {
+        $scope.resetDropzone();
+    };
+
 	$scope.publicarDepto = function(){
-		var url = 'http://localhost:3000/Apartments/';
+		
+		$scope.myDropzone.options.url = 'http://localhost:3000/Apartments/';
+
 		var data = {
 			title: $scope.titulo,
 			description: $scope.descripcion,
 			address:{ 
-				fullAdress:String, 
+				fullAdress:$scope.direccion.FullAdress, 
 				coor:{
            			type:"Point",
-           			coordinates:[-34.623876, -58.417677]
+           			coordinates:[$scope.direccion.Lat, $scope.direccion.Lng]
        			}
 			}
 		}
 
-		$http.post(url, data).then(function(r){
-			console.log(r);
-			$scope.resultado = r;
-			$state.go('publicaciones');
-		});
+		$scope.formDataKeyStr = 'apartment';
+		$scope.formDataValueStr = JSON.stringify(data);
+
+		// $http.post(url, data).then(function(r){
+		// 	console.log(r);
+		// 	$scope.resultado = r;
+		// 	$state.go('publicaciones');
+		// });
+
+		$scope.processDropzone();		
 	}
+
+    $scope.uploadCallback = function(file, response) {
+        $state.go('publicaciones');
+    };
 
 });

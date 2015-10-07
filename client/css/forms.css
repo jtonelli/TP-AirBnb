@@ -3,6 +3,10 @@
 	justify-content:space-between;
 }
 
+.myform{
+	width: 300px;
+}
+
 .myfield{
 	border: none;
 	margin: 0;
@@ -17,11 +21,13 @@
 .myfield
 .myinput{
 	display: block;
+	width: 100%;
 }
 
 .myfield
 .myarea{
 	display: block;
+	width: 100%;
 }
 
 .myfield
@@ -37,10 +43,13 @@
   	align-items: center;
 }
 
-.mysearchfield-container
-.foto{
-	width: 48px;
-	height: 48px;
+.dropzone-container{
+	border: 1px dashed;
+	margin: 0;
+	padding: 0;
+	height: 155px;
+	width: 650px;
+	overflow: auto;
 }
 
 .mysearchfield-container
