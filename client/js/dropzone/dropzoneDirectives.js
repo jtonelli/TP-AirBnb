@@ -37,6 +37,7 @@ function dropzone() {
             'sendingmultiple': function(file, xhr, formData) {
                 //agrego data para grabar junto con las imagenes
                 formData.append(scope.formDataKeyStr, scope.formDataValueStr);
+                xhr.setRequestHeader('Authorization', scope.token);
             }
         };
 

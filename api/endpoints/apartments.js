@@ -8,10 +8,12 @@ var Apartments = models.apartments;
 
 // var User = require('../models/users');
 
-router.post('/', function(req, res) {
-	//Creo un departamento
-	var a = new apartments(req.body);
-	a.active = true;
+var cloudinary = require('../helpers/cloudinary');
+
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart({ uploadDir: 'uploads/' });
+
+router.post('/', multipartMiddleware, function(req, res) {
 
 	try{
 		var decodedUser =  jwt.decode(req.headers.authorization);
@@ -21,19 +23,40 @@ router.post('/', function(req, res) {
 
 	if(decodedUser.id){
 
+		//Creo un departamento
+		var a = new Apartments(JSON.parse(req.body.apartment));
+		a.active = true;
 		a.owner = decodedUser.id;
 
-		//Grabo el departameto
-		a.save(function (err) {
-			if(err){
-			  console.log('Error - ', err);
-			  res.status(400).end();
-			}
-			else{
-			  console.log(a);
-			  res.status(201).end();
-			}
-		});
+		var imagePath;
+		var i;
+
+		for (i = 0; i < req.files.uploadfile.length; paso++) {
+			imagePath = req.files.uploadfile[i].path;
+			cloudinary.uploader.upload(imagePath, function(result) { 
+			  	// console.log(result.public_id);
+			  	// console.log(result.url);
+			  	a.pictures.push({url: result.url});
+			});
+		};
+
+		// console.log(req.files.uploadfile[0].path);
+		// res.status(200).json({resultado:'todo ok'});
+
+		console.log('save');
+		console.log(a);
+
+		// Grabo el departameto
+		// a.save(function (err) {
+		// 	if(err){
+		// 	  console.log('Error - ', err);
+		// 	  res.status(400).json({resultado:'Error'});
+		// 	}
+		// 	else{
+		// 	  console.log(a);
+		// 	  res.status(200).json({resultado:'todo ok'});
+		// 	}
+		// });
 	}
 	else{
 		res.status(400).json({error:'invalid user'});
@@ -79,6 +102,7 @@ router.get('/',function(req,res){
 	});
 });
 
+//multipartMiddleware
 router.put('/:Id', function(req, res) {
 
 	try{

@@ -48,12 +48,14 @@ mod.controller('ResultadoCtrl',function($scope,$stateParams,$http){
 	});
 });
 
-mod.controller('LoginCtrl',function($scope,$http,$state){
+mod.controller('LoginCtrl',function($scope,$http,$state,$localStorage){
 	$scope.loginConValidacion = function(){
 		var url = 'http://localhost:3000/users/auth/?email=' + $scope.email + '&password=' + $scope.pass;
 
 		$http.get(url).then(function(r){
 			$localStorage.token = r.data.token;
+			console.log(r);
+			console.log($localStorage.token);
 			$scope.resultado = r;
 			$state.go('home');
 		});
@@ -93,7 +95,7 @@ mod.controller('PublicacionesDetCtrl',function($scope,$http,$state,$stateParams)
     	Lng: -58.368989
     };
 
-	MyGMaps_initMapa(coordenadas, 'Ayacucho 2500', 'La casa de Juan');
+	MyGMaps_initMap(coordenadas, 'Ayacucho 2500', 'La casa de Juan');
 
 	// var url = 'http://localhost:3000/Apartments/' + $stateParams.query;
 
@@ -151,7 +153,9 @@ mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 	}
 });
 
-mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams){
+mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams,$localStorage){
+
+	$scope.token = $localStorage.token;
 
 	$scope.direccion = {
 	  FullAdress: '',
@@ -161,37 +165,32 @@ mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams){
 
 	$scope.direccion.FullAdress = 'zepita 3251, capital federal';
 
-	MyGoogleMapsV2_initialize();
+	// MyGMaps_GeoCodInit();
 
 	$scope.buscarDireccion = function(){
 
-		MyGoogleMapsV2_findLocation($scope.direccion.FullAdress, function (response) {
+		MyGMaps_GetGeoCod($scope.direccion.FullAdress, function (results, status) {
 
-		    map.clearOverlays();
+			if (status === google.maps.GeocoderStatus.OK) {
 
-		    if (!response || response.Status.code != 200) {
-		        $scope.direccion = {
-		            FullAdress: '',
-		            Lat: 0,
-		            Lng: 0
-		        };
+				$scope.direccion = {
+					FullAdress: results[0].formatted_address,
+					Lat: results[0].geometry.location.H,
+					Lng: results[0].geometry.location.L
+				};
 		    } else {
-
-		        $scope.direccion = {
-		            FullAdress: response.Placemark[0].address,
-		            Lat: response.Placemark[0].Point.coordinates[1],
-		            Lng: response.Placemark[0].Point.coordinates[0]
-		        };
-
-		        $scope.adress = response.Placemark[0].address;
+				$scope.direccion = {
+					FullAdress: '',
+					Lat: 0,
+					Lng: 0
+				};
+		    	alert('Direccion erronea. Error: ' + status);
 		    }
-	    	//??????????????????????
-		    $scope.$apply();
+
+			//??????????????????????
+			$scope.$apply();
 		});
 	}
-	
-	// $scope.filename = '';
-    $scope.senddataobj = false;
 
     $scope.dropzoneReset = function() {
         $scope.resetDropzone();
@@ -222,10 +221,11 @@ mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams){
 		// 	$state.go('publicaciones');
 		// });
 
-		$scope.processDropzone();		
+		$scope.processDropzone();
 	}
 
     $scope.uploadCallback = function(file, response) {
+    	console.log(response);
         $state.go('publicaciones');
     };
 

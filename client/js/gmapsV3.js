@@ -1,4 +1,4 @@
-function MyGMaps_initMapa (coordenadas, address, info) {
+function MyGMaps_initMap (coordenadas, address, info) {
 	// var coordenadas = {
 	// 	Lat: -34.6081947,
 	// 	Lng: -58.4796471
@@ -16,16 +16,16 @@ function MyGMaps_initMapa (coordenadas, address, info) {
 	var place = new google.maps.LatLng(coordenadas.Lat, coordenadas.Lng);
 	var marker = new google.maps.Marker({
 	    position: place,
-	    title: 'Ubicacion del Depto',
-	    map: map
+	    title: 'address',
 	});
 
+	marker.setMap(map);
+	marker.setMap(null);
+
 	var infowindow = new google.maps.InfoWindow({
-	    map: map,
 	    content: 'info' + " - " + 'address'
 	});
 
-	// marker.openInfoWindowHtml('info' + " - " + 'address');
 	infowindow.open(map, marker);
 
 	// Add circle overlay and bind to marker (radius in metres)
@@ -35,5 +35,11 @@ function MyGMaps_initMapa (coordenadas, address, info) {
 	  fillColor: '#48C6D8' //'#AA0000' 
 	  // : '#00AA00'
 	});
+
 	circle.bindTo('center', marker, 'position');
+}
+
+function MyGMaps_GetGeoCod(address, callback) {
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'address': address}, callback);
 }
