@@ -125,12 +125,32 @@ mod.controller('PublicacionesDetCtrl',function($scope,$http,$state,$stateParams)
 mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 	var url = 'http://localhost:3000/Apartments/myApartments/';
 
-	rsliderInit();
+	rsliderInit("#" + "slider4");
 
 	$http.get(url).then(function(r){
 		console.log(r);
 		$scope.resultados = r.data;
+
+		var i;
+		function uploader(i) {
+			if( i < $scope.resultados.length ) {
+		  		$scope.resultados[i].sliderId = "slider" + (i+1);
+		  		// rsliderInit("#" + $scope.resultados.sliderId);
+				uploader(i+1);
+
+			} else{
+				console.log('Todo OK')
+				// rsliderInit("#" + "slider1");
+				// rsliderInit("#" + "slider2");
+				// rsliderInit("#" + "slider3");
+			}
+		}
+		uploader(0);
 	});
+
+	$scope.init = function(idControl){
+		rsliderInit("#" + idControl);
+	}
 
 	$scope.verDetallePub = function(apartmentId){
 		$state.go('publicacionesDet',{

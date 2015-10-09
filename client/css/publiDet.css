@@ -16,6 +16,7 @@
 .foto {	
 	border: 2px solid;
 	width: 60%;
+	max-width: 700px;
 }
 
 .pub-det
