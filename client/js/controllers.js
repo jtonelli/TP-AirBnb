@@ -125,6 +125,8 @@ mod.controller('PublicacionesDetCtrl',function($scope,$http,$state,$stateParams)
 mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 	var url = 'http://localhost:3000/Apartments/myApartments/';
 
+	rsliderInit();
+
 	$http.get(url).then(function(r){
 		console.log(r);
 		$scope.resultados = r.data;
@@ -175,8 +177,8 @@ mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams,$localSt
 
 				$scope.direccion = {
 					FullAdress: results[0].formatted_address,
-					Lat: results[0].geometry.location.H,
-					Lng: results[0].geometry.location.L
+					Lat: results[0].geometry.location.lat(),
+					Lng: results[0].geometry.location.lng()
 				};
 		    } else {
 				$scope.direccion = {

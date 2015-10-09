@@ -3,6 +3,35 @@
             <h2>Mis Publicaciones</h2>
 
             <section class="resultados">
+                <article class="articulo">
+                <div class="foto">
+                    <div id="wrapper">  
+                        <!-- Slideshow 3 -->
+                        <div class="rslides_container">
+                          <ul class="rslides" id="slider3">
+                            <li><img src="Images/1.jpg" alt=""></li>
+                            <li><img src="Images/2.jpg" alt=""></li>
+                            <li><img src="http://res.cloudinary.com/dgx2ewhbo/image/upload/c_scale,h_400,w_800/v1444352050/ctasopfbghqhzelt3fdm.jpg" alt=""></li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+
+                    <section class="articulo-header">    
+                        <h2 class="titulo">Galeria</h2>
+                        <p class="texto">
+                            Slidy
+                        </p>
+                    </section>
+                    <div class="btn-container">
+                        <button class="btn-detalle">Ver</button>
+                        <button class="btn-detalle">Modificar</button>
+                        <button class="btn-detalle">Eliminar</button>
+                    </div>
+                </article>
+            </section>
+
+            <section class="resultados">
                 <article class="articulo" ng-repeat="item in resultados">
                     <img src="{{item.thumbnail}}" alt="foto" class="foto">
                     <section class="articulo-header">    
@@ -12,9 +41,9 @@
                         </p>
                     </section>
                     <div class="btn-container">
-                        <button class="btn-detalle" ng-click="verDetallePub({{item._id}})">Ver</button>
-                        <button class="btn-detalle" ng-click="modificarPub({{item._id}})">Modificar</button>
-                        <button class="btn-detalle" ng-click="eliminarPub({{item._id}})">Eliminar</button>
+                        <button class="btn-detalle" ng-click="verDetallePub(item._id)">Ver</button>
+                        <button class="btn-detalle" ng-click="modificarPub(item._id)">Modificar</button>
+                        <button class="btn-detalle" ng-click="eliminarPub(item._id)">Eliminar</button>
                     </div>
                 </article>
             </section>

@@ -23,45 +23,144 @@ router.post('/', multipartMiddleware, function(req, res) {
 
 	if(decodedUser.id){
 
+		console.log('=============================')
+		console.log(req.body.apartment);
+		console.log('=============================')
+
 		//Creo un departamento
 		var a = new Apartments(JSON.parse(req.body.apartment));
 		a.active = true;
 		a.owner = decodedUser.id;
 
-		var imagePath;
-		var i;
+		console.log(JSON.stringify(a))
+		console.log('=============================')
 
-		for (i = 0; i < req.files.uploadfile.length; paso++) {
-			imagePath = req.files.uploadfile[i].path;
-			cloudinary.uploader.upload(imagePath, function(result) { 
-			  	// console.log(result.public_id);
-			  	// console.log(result.url);
-			  	a.pictures.push({url: result.url});
-			});
-		};
+		// Grabo el departameto
+		a.save(function (err) {
+			console.log('save 1 =======================')
+			if(err){
+			  console.log('Error - ', err);
+			  res.status(400).json({resultado:'Error'});
+			}
+			else{
+			  	// console.log(a);
+			  	// res.status(200).json({resultado:'todo ok'});
+				var imagePath;
+				var i;
+
+				function uploader(i) {
+					if( i < req.files.uploadfile.length ) {
+						imagePath = req.files.uploadfile[i].path;
+						cloudinary.uploader.upload(imagePath, function(result) { 
+						  	// console.log(result.public_id);
+						  	// console.log(result);
+						  	console.log('picture add', result.url);
+						  	a.pictures.push({url: result.url});
+							// console.log('picture upload');
+							// console.log(a.pictures);
+							uploader(i+1)
+						});
+						// haceAlgo(i, function(queHizo){
+						//    console.log('terminó de hacer ' + queHizo);
+						//    uploader(i+1)
+						// }); 
+						// uploader(i+1)
+					} else{
+						a.save(function (err) {
+							console.log('save 2 =======================')
+							if(err){
+							  console.log('Error - ', err);
+							  res.status(400).json({resultado:'Error'});
+							}
+							else{
+								console.log('apartments');
+							  	console.log(a);
+							  	res.status(200).json({resultado:'todo ok'});
+							}
+						});
+					}
+				}
+
+				uploader(0);
+
+				// for (i = 0; i < req.files.uploadfile.length; i++) {
+				// 	imagePath = req.files.uploadfile[i].path;
+				// 	cloudinary.uploader.upload(imagePath, function(result) { 
+				// 	  	// console.log(result.public_id);
+				// 	  	// console.log(result);
+				// 	  	console.log('picture add', result.url);
+				// 	  	a.pictures.push({url: result.url});
+				// 		console.log('picture upload');
+				// 		console.log(a.pictures);
+				// 	});
+				// };
+			}
+		});
 
 		// console.log(req.files.uploadfile[0].path);
 		// res.status(200).json({resultado:'todo ok'});
-
-		console.log('save');
-		console.log(a);
-
-		// Grabo el departameto
-		// a.save(function (err) {
-		// 	if(err){
-		// 	  console.log('Error - ', err);
-		// 	  res.status(400).json({resultado:'Error'});
-		// 	}
-		// 	else{
-		// 	  console.log(a);
-		// 	  res.status(200).json({resultado:'todo ok'});
-		// 	}
-		// });
+		// console.log('save');
+		// console.log(a);
+		// res.status(400).json({resultado:'error'});
 	}
 	else{
 		res.status(400).json({error:'invalid user'});
 	}
 });
+
+// router.post('/', multipartMiddleware, function(req, res) {
+
+// 	try{
+// 		var decodedUser =  jwt.decode(req.headers.authorization);
+// 	}catch(e){
+// 		res.status(400).json({error:'invalid token'})
+// 	}
+
+// 	if(decodedUser.id){
+
+// 		//Creo un departamento
+// 		var a = new Apartments(JSON.parse(req.body.apartment));
+// 		a.active = true;
+// 		a.owner = decodedUser.id;
+
+// 		var imagePath;
+// 		var i;
+
+// 		for (i = 0; i < req.files.uploadfile.length; i++) {
+// 			imagePath = req.files.uploadfile[i].path;
+// 			cloudinary.uploader.upload(imagePath, function(result) { 
+// 			  	// console.log(result.public_id);
+// 			  	// console.log(result);
+// 			  	console.log('picture add', result.url);
+// 			  	a.pictures.push({url: result.url});
+// 				console.log('picture upload');
+// 				console.log(a.pictures);
+// 			});
+// 		};
+
+// 		// console.log(req.files.uploadfile[0].path);
+// 		// res.status(200).json({resultado:'todo ok'});
+
+// 		console.log('save');
+// 		console.log(a);
+// 		// res.status(400).json({resultado:'error'});
+
+// 		// Grabo el departameto
+// 		// a.save(function (err) {
+// 		// 	if(err){
+// 		// 	  console.log('Error - ', err);
+// 		// 	  res.status(400).json({resultado:'Error'});
+// 		// 	}
+// 		// 	else{
+// 		// 	  console.log(a);
+// 		// 	  res.status(200).json({resultado:'todo ok'});
+// 		// 	}
+// 		// });
+// 	}
+// 	else{
+// 		res.status(400).json({error:'invalid user'});
+// 	}
+// });
 
 //departamentos de un usuario
 router.get('/myApartments', function(req, res) {
