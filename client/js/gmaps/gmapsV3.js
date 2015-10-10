@@ -1,8 +1,9 @@
-function MyGMaps_initMap (coordenadas, address, info) {
-	// var coordenadas = {
-	// 	Lat: -34.6081947,
-	// 	Lng: -58.4796471
-	// };
+function MyGMaps_initMap (coor, address, info) {
+
+	var coordenadas = {
+	 	Lat: coor[0],
+	 	Lng: coor[1]
+	};
 
 	var mapOptions = {
 	    zoom: 12,
@@ -20,10 +21,10 @@ function MyGMaps_initMap (coordenadas, address, info) {
 	});
 
 	marker.setMap(map);
-	marker.setMap(null);
+	// marker.setMap(null);
 
 	var infowindow = new google.maps.InfoWindow({
-	    content: 'info' + " - " + 'address'
+	    content: info + " - " + address
 	});
 
 	infowindow.open(map, marker);

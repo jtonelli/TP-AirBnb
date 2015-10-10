@@ -108,60 +108,6 @@ router.post('/', multipartMiddleware, function(req, res) {
 	}
 });
 
-// router.post('/', multipartMiddleware, function(req, res) {
-
-// 	try{
-// 		var decodedUser =  jwt.decode(req.headers.authorization);
-// 	}catch(e){
-// 		res.status(400).json({error:'invalid token'})
-// 	}
-
-// 	if(decodedUser.id){
-
-// 		//Creo un departamento
-// 		var a = new Apartments(JSON.parse(req.body.apartment));
-// 		a.active = true;
-// 		a.owner = decodedUser.id;
-
-// 		var imagePath;
-// 		var i;
-
-// 		for (i = 0; i < req.files.uploadfile.length; i++) {
-// 			imagePath = req.files.uploadfile[i].path;
-// 			cloudinary.uploader.upload(imagePath, function(result) { 
-// 			  	// console.log(result.public_id);
-// 			  	// console.log(result);
-// 			  	console.log('picture add', result.url);
-// 			  	a.pictures.push({url: result.url});
-// 				console.log('picture upload');
-// 				console.log(a.pictures);
-// 			});
-// 		};
-
-// 		// console.log(req.files.uploadfile[0].path);
-// 		// res.status(200).json({resultado:'todo ok'});
-
-// 		console.log('save');
-// 		console.log(a);
-// 		// res.status(400).json({resultado:'error'});
-
-// 		// Grabo el departameto
-// 		// a.save(function (err) {
-// 		// 	if(err){
-// 		// 	  console.log('Error - ', err);
-// 		// 	  res.status(400).json({resultado:'Error'});
-// 		// 	}
-// 		// 	else{
-// 		// 	  console.log(a);
-// 		// 	  res.status(200).json({resultado:'todo ok'});
-// 		// 	}
-// 		// });
-// 	}
-// 	else{
-// 		res.status(400).json({error:'invalid user'});
-// 	}
-// });
-
 //departamentos de un usuario
 router.get('/myApartments', function(req, res) {
 
@@ -186,8 +132,35 @@ router.get('/myApartments', function(req, res) {
 });
 
 //departamentos por filtros
+router.get('/:Id',function(req,res){
+
+	try{
+		var decodedUser =  jwt.decode(req.headers.authorization);
+	}catch(e){
+		res.status(400).json({error:'invalid token'})
+	}
+
+	if(decodedUser.id){
+
+		console.log(req.params);
+		//Obtener Owner del Deptop por el req.params.Id
+		var query = { _id : req.params.Id};
+
+		Apartments.findOne(query, function(err, apart){
+			console.log('Depto -getbyid -', apart);
+			res.status(200).json(apart);
+		});
+
+	}
+	else{
+		res.status(400).json({error:'invalid user'});
+	}
+});
+
+//departamentos por filtros
 router.get('/',function(req,res){
 
+	console.log('aparts -get-', req.query);
 	// Busqueda con filtro
 	// var query = {
 	// 	filtro1: req.query.filtro1,

@@ -4,22 +4,15 @@
 
     <section class="resultados">
         <article class="articulo" ng-repeat="item in resultados">
-
             <div class="foto">
-                <!-- Slideshow 3 -->
                 <div class="rslides_container">
-                  <!-- <ul class="rslides" id="slider3"> -->
-                  <ul class="rslides" ng-attr-id="{{item.sliderId}}" data-ng-init="init(item.sliderId)">
+                  <ul class="rslides" ng-attr-id="{{item.sliderId}}">
                     <li ng-repeat="pic in item.pictures">
                         <img src="{{pic.url}}" alt="">
                     </li>
-                    <!-- <li><img src="Images/1.jpg" alt=""></li>
-                    <li><img src="Images/2.jpg" alt=""></li>
-                    <li><img src="http://res.cloudinary.com/dgx2ewhbo/image/upload/c_scale,h_400,w_800/v1444352050/ctasopfbghqhzelt3fdm.jpg" alt=""></li> -->
                   </ul>
                 </div>
             </div>
-
             <section class="articulo-header">    
                 <h2 class="titulo">{{item.title}}</h2>
                 <p class="texto">
@@ -33,31 +26,7 @@
             </div>
         </article>
     </section>
-    
-    <section class="resultados">
-        <article class="articulo">
-            <div class="foto">
-                <div class="rslides_container">
-                  <ul class="rslides" id="slider4">
-                    <li><img src="Images/1.jpg" alt=""></li>
-                    <li><img src="Images/2.jpg" alt=""></li>
-                    <li><img src="http://res.cloudinary.com/dgx2ewhbo/image/upload/c_scale,h_400,w_800/v1444352050/ctasopfbghqhzelt3fdm.jpg" alt=""></li>
-                  </ul>
-                </div>
-            </div>
 
-            <section class="articulo-header">    
-                <h2 class="titulo">Galeria</h2>
-                <p class="texto">
-                    Slidy
-                </p>
-            </section>
-            <div class="btn-container">
-                <button class="btn-detalle">Ver</button>
-                <button class="btn-detalle">Modificar</button>
-                <button class="btn-detalle">Eliminar</button>
-            </div>
-        </article>
-    </section>
+    <div collapse-elem></div>
     
 </section>

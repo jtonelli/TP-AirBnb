@@ -84,73 +84,91 @@ mod.controller('RecuperarPassCtrl',function($scope,$http,$state){
 });
 
 mod.controller('PublicacionesDetCtrl',function($scope,$http,$state,$stateParams){
-	
+
 	// var coordenadas = {
-	// 	Lat: -34.6081947,
-	// 	Lng: -58.4796471
-	// };
+	//    	Lat: -34.709616,
+	//    	Lng: -58.368989
+	//    };
 
-	var coordenadas = {
-    	Lat: -34.709616,
-    	Lng: -58.368989
-    };
+	// MyGMaps_initMap(coordenadas, 'Ayacucho 2500', 'La casa de Juan');
 
-	MyGMaps_initMap(coordenadas, 'Ayacucho 2500', 'La casa de Juan');
+	var url = 'http://localhost:3000/Apartments/' + $stateParams.query;
 
-	// var url = 'http://localhost:3000/Apartments/' + $stateParams.query;
+	console.log(url);
 
-	// $http.get(url).then(function(r){
-	// 	console.log(r);
-	// 	$scope.resultado = r.data;
-	// 	console.log('================');
-	// 	console.log(r.data.address.coor.coordinates);
-	// 	iniciarmapa();
-	// });
+	$http.get(url).then(function(r){
+		console.log('OK');
+		$scope.resultado = r.data;
+		console.log('================');
+		console.log(r.data.address.coor.coordinates);
+		MyGMaps_initMap(r.data.address.coor.coordinates, r.data.address.fullAdress, r.data.title);
+	});
 
-	// $scope.reservarDepto = function(apartmentId){
-	// 	var urlReserva = 'http://localhost:3000/Reservations/';
-	// 	var data = {
-	// 		startDate: $scope.fechaDesde,
-	// 		endDate: $scope.fechaHasta,
-	// 	}
+	$scope.reservarDepto = function(apartmentId){
+		var urlReserva = 'http://localhost:3000/Reservations/';
+		var data = {
+			startDate: $scope.fechaDesde,
+			endDate: $scope.fechaHasta,
+		}
 
-	// 	$http.post(urlReserva, data).then(function(r){
-	// 		console.log(r);
-	// 		$scope.resultado = r;
-	// 		alert('Reserva OK');
-	// 	});
-	// }
+		$http.post(urlReserva, data).then(function(r){
+			console.log(r);
+			$scope.resultado = r;
+			alert('Reserva OK');
+		});
+	}
 });
 
 mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 	var url = 'http://localhost:3000/Apartments/myApartments/';
 
-	rsliderInit("#" + "slider4");
+	// rsliderInit("#" + "slider4");
+ 
+	$scope.init = function () {
+		$scope.loading = true;
 
-	$http.get(url).then(function(r){
-		console.log(r);
-		$scope.resultados = r.data;
+		$http.get(url).then(function(r){
+			console.log(r);
+			$scope.resultados = r.data;
 
-		var i;
-		function uploader(i) {
-			if( i < $scope.resultados.length ) {
-		  		$scope.resultados[i].sliderId = "slider" + (i+1);
-		  		// rsliderInit("#" + $scope.resultados.sliderId);
-				uploader(i+1);
+			var i;
+			function uploader(i) {
+				if( i < $scope.resultados.length ) {
+			  		$scope.resultados[i].sliderId = "slider" + (i+1);
+			  		// rsliderInit("#" + $scope.resultados[i].sliderId);
+					uploader(i+1);
 
-			} else{
-				console.log('Todo OK')
-				// rsliderInit("#" + "slider1");
-				// rsliderInit("#" + "slider2");
-				// rsliderInit("#" + "slider3");
+				} else{
+					console.log('Todo OK');
+					$scope.$broadcast('dataloaded');
+				}
 			}
-		}
-		uploader(0);
-	});
+			uploader(0);
+			// $scope.$broadcast('dataloaded');
+		});
+	};
+ 
+	$scope.init();
 
-	$scope.init = function(idControl){
-		rsliderInit("#" + idControl);
-	}
+	// $http.get(url).then(function(r){
+	// 	console.log(r);
+	// 	$scope.resultados = r.data;
+
+	// 	var i;
+	// 	function uploader(i) {
+	// 		if( i < $scope.resultados.length ) {
+	// 	  		$scope.resultados[i].sliderId = "slider" + (i+1);
+	// 	  		// rsliderInit("#" + $scope.resultados[i].sliderId);
+	// 			uploader(i+1);
+
+	// 		} else{
+	// 			console.log('Todo OK');
+	// 			$scope.$broadcast('dataloaded');
+	// 		}
+	// 	}
+	// 	uploader(0);
+	// 	// $scope.$broadcast('dataloaded');
+	// });
 
 	$scope.verDetallePub = function(apartmentId){
 		$state.go('publicacionesDet',{
@@ -174,6 +192,23 @@ mod.controller('PublicacionesCtrl',function($scope,$http,$state){
 		});
 	}
 });
+
+mod.directive('collapseElem', ['$timeout', function ($timeout) {
+  return {
+    link: function ($scope, element, attrs) {
+    	console.log('directiva');
+      $scope.$on('dataloaded', function () {
+        $timeout(function () { 
+        	// console.log($scope.resultados.length);
+          	for (var i = 0; i < $scope.resultados.length; i++) {
+            	console.log("Hello world!" + i);
+            	rsliderInit("#" + $scope.resultados[i].sliderId);
+            }
+        }, 0, false);
+      })
+    }
+  };
+}]);
 
 mod.controller('PublicarCtrl',function($scope,$http,$state,$stateParams,$localStorage){
 
